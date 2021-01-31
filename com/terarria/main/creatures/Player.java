@@ -20,7 +20,7 @@ public class Player extends Creature {
 	GameHandler handler;
 	boolean onGround = false;
 	public Map<ITEM_TYPES, Integer> inventory = new HashMap<ITEM_TYPES, Integer>();
-	public ITEM_TYPES heldItem = ITEM_TYPES.wood;
+	public ITEM_TYPES heldItem;
 	int speed = 3;
 
 	public Player(int x, int y, Input input, GameHandler handler) {
@@ -144,8 +144,10 @@ public class Player extends Creature {
 		g.setColor(new Color(80, 80, 80));
 		g.fillRect(Game.WIDTH / 2, Game.HEIGHT / 2, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 
-		g.drawString(heldItem.toString(), 32, 32);
-		g.drawString(heldItem.toString(), 96, 32);
+		if(heldItem != null) {
+			g.drawString(heldItem.toString(), 32, 32);
+			g.drawString(inventory.get(heldItem).toString(), 96, 32);
+		}
 		
 		// Draw coordinates, colliders, onGround and velocities
 		if(Game.DEBUG) {
